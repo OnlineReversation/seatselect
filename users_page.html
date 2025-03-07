@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <title>users_page</title>
+  <link rel="stylesheet" href="nicepage.css" media="screen">
+  <link rel="stylesheet" href="users_page.css" media="screen">
+  <script class="u-script" type="text/javascript" src="jquery-1.9.1.min.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+  <meta name="generator" content="Nicepage 7.5.3, nicepage.com">
+  <link rel="icon" href="images/favicon.jpg">
+
+
+
+  <link id="u-theme-google-font" rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+  <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": "SeatSelect",
+		"logo": "images/logo-removebg-preview.png"
+}</script>
+  <meta name="theme-color" content="#86afc0">
+  <meta property="og:title" content="users_page">
+  <meta property="og:description" content="">
+  <meta property="og:type" content="website">
+  <meta data-intl-tel-input-cdn-path="intlTelInput/">
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery CDN -->
+</head>
+
+<body data-path-to-root="./" data-include-products="false" class="u-body u-xl-mode" data-lang="en">
+  <header class="u-clearfix u-grey-50 u-header u-header" id="header">
+    <div class="u-clearfix u-sheet u-sheet-1">
+      <a href="#" class="u-image u-image-round u-logo u-opacity u-opacity-80 u-radius u-image-1" data-image-width="500"
+        data-image-height="500">
+        <img src="images/logo-removebg-preview.png" class="u-logo-image u-logo-image-1">
+      </a>
+      <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1">
+        <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
+          <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-top-bottom-menu-spacing u-hamburger-link u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+            href="#">
+            <svg class="u-svg-link" viewBox="0 0 24 24">
+              <use xlink:href="#menu-hamburger"></use>
+            </svg>
+            <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px"
+              xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+              <g>
+                <rect y="1" width="16" height="2"></rect>
+                <rect y="7" width="16" height="2"></rect>
+                <rect y="13" width="16" height="2"></rect>
+              </g>
+            </svg>
+          </a>
+        </div>
+        <div class="u-custom-menu u-nav-container">
+          <ul class="u-nav u-unstyled u-nav-1">
+            <li class="u-nav-item"><a
+                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="./"
+                style="padding: 10px 20px;">Home</a>
+            </li>
+            <li class="u-nav-item"><a
+                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                href="available_tables_page.html" style="padding: 10px 20px;">Available Tables</a>
+            </li>
+            <li class="u-nav-item"><a
+                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                href="team_page.html" style="padding: 10px 20px;">Our Team</a>
+            </li>
+            <li class="u-nav-item"><a
+                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                href="login_page.html" style="padding: 10px 20px;">Sign Up</a>
+            </li>
+          </ul>
+        </div>
+        <div class="u-custom-menu u-nav-container-collapse">
+          <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+            <div class="u-inner-container-layout u-sidenav-overflow">
+              <div class="u-menu-close"></div>
+              <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
+                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="./">Home</a>
+                </li>
+                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="available_tables_page.html">Available
+                    Tables</a>
+                </li>
+                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="team_page.html">Our Team</a>
+                </li>
+                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="login_page.html">Sign Up</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <section class="u-align-left u-clearfix u-section-1" id="sec-ae96">
+    <div class="u-clearfix u-sheet u-sheet-1">
+      <h2 class="u-align-center u-text u-text-1" data-animation-name="customAnimationIn" data-animation-duration="1500"
+        data-animation-delay="500"> User&nbsp; Management</h2>
+      <div class="custom-expanded u-table u-table-responsive u-table-1">
+        <table id="users_table" border="1" class="u-table-entity">
+          <colgroup>
+            <col width="21.43%">
+            <col width="32.18%">
+            <col width="24.9%">
+            <col width="21.49%">
+          </colgroup>
+
+          <thead>
+            <tr style="height: 74px;">
+              <td class="u-align-left u-first-column u-palette-1-light-3 u-table-cell u-table-cell-1">ID </td>
+              <td class="u-align-center u-palette-1-light-2 u-table-cell u-table-cell-2">Login</td>
+              <td class="u-align-center u-palette-1-light-1 u-table-cell u-table-cell-3">Email</td>
+              <td class="u-align-center u-table-cell u-table-cell-4"></td>
+            </tr>
+          </thead>
+
+          <tbody class="u-align-center u-table-body">
+            <tr style="height: 44px;">
+              <td class="u-align-left u-first-column u-grey-5 u-table-cell u-table-cell-5">Superadmin</td>
+              <td class="u-grey-10 u-table-cell u-table-cell-6">admin</td>
+              <td class="u-grey-15 u-table-cell u-table-cell-7">Ganna.K@example.com</td>
+              <td class="u-table-cell">
+                <a class="u-active-grey-60 u-border-1 u-border-active-grey-60 u-border-grey-60 u-border-hover-grey-60 u-btn u-button-style u-hover-grey-60 u-white u-btn-1"
+                  href="#" target="_blank">EDIT</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button id="refresh_users" onclick="refresh_users()"
+        class="u-active-grey-70 u-align-center u-border-none u-btn u-button-style u-hover-grey-70 u-palette-1-base u-text-active-white u-text-body-alt-color u-text-hover-white u-btn-2"
+        data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="750"
+        data-animation-direction="">Refresh the page </button>
+
+      <a href="admin_page.html" data-page-id="165858549"
+        class="u-active-none u-border-2 u-border-active-palette-2-dark-1 u-border-hover-palette-2-base u-border-no-left u-border-no-right u-border-no-top u-border-palette-1-base u-btn u-button-style u-hover-none u-none u-text-hover-palette-2-base u-text-palette-1-base u-btn-3"
+        title="admin_page">back to admin page</a>
+    </div>
+  </section>
+
+
+
+  <footer class="u-align-center u-clearfix u-container-align-center u-footer u-grey-80 u-footer" id="footer">
+    <div class="u-clearfix u-sheet u-sheet-1">
+      <p class="u-small-text u-text u-text-variant u-text-1">Software Project Engineering RGU 2025</p>
+    </div>
+  </footer>
+
+  <script src="users_page.js"></script>
+</body>
+
+</html>
