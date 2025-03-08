@@ -34,7 +34,6 @@
 @media (max-width: 767px) {
   .u-section-1 .u-image-1 {
     margin-top: 20px;
-    margin-bottom: initial;
   }
 }
 
@@ -51,6 +50,5 @@
     width: 340px;
     height: 383px;
     margin-right: 0;
-    margin-bottom: 60px;
   }
 }

@@ -100,7 +100,10 @@
   <section class="u-align-center u-clearfix u-container-align-center u-section-1" id="block-1">
     <div class="u-clearfix u-sheet u-sheet-1"><!--login_form-->
       <div class="u-form u-login-control u-form-1"><!--login_form_inner-->
-        <form action="#" class="u-clearfix u-form-custom-backend u-form-spacing-10 u-form-vertical u-inner-form"
+
+
+        <!-- <form action="api/validate.php" method="post" source="custom" -->
+        <form id="login_form" class="u-clearfix u-form-custom-backend u-form-spacing-10 u-form-vertical u-inner-form"
           source="custom" name="form" style="padding: 10px;" method="post"><!--login_form_usernameGroup-->
           <div class="u-form-group u-form-name"><!--login_form_usernameLabel-->
             <label class="u-label">Username *</label><!--/login_form_usernameLabel--><!--login_form_username-->
@@ -112,17 +115,16 @@
             <input type="text" placeholder="Enter your Password" id="password-a30d" name="password"
               class="u-input u-input-rectangle u-none u-input-2" required=""><!--/login_form_password-->
           </div><!--/login_form_passwordGroup--><!--login_form_rememberGroup-->
-          <div class="u-form-checkbox u-form-group"><!--login_form_remember-->
-            <input type="checkbox" id="checkbox-a30d" name="remember" value="On"
-              class="u-field-input"><!--/login_form_remember--><!--login_form_rememberLabel-->
-            <label class="u-block-8831-32 u-field-label" >Remember me</label><!--/login_form_rememberLabel-->
-          </div><!--/login_form_rememberGroup--><!--login_form_submit-->
+          <!--login_form_submit-->
           <div class="u-align-left u-form-group u-form-submit">
-            <a href="#" class="u-btn u-btn-submit u-button-style u-btn-1">Login</a>
-            <input type="submit" value="submit" class="u-form-control-hidden">
+            <a href="#" class="u-btn u-btn-submit u-button-style u-btn-1" onclick="submitForm(event)">Login</a>
+            <!-- <input type="submit" value="submit" class="u-form-control-hidden"> -->
+
           </div><!--/login_form_submit-->
           <input type="hidden" value="" name="recaptchaResponse">
         </form><!--/login_form_inner-->
+
+
       </div><!--/login_form--><!--login_form_forgot_password-->
       <a href="forgotten_password.html"
         class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-btn u-button-style u-login-control u-login-forgot-password u-none u-text-palette-1-base u-btn-2">Forgot
@@ -140,6 +142,65 @@
       <p class="u-small-text u-text u-text-variant u-text-1"> Software Project Engineering RGU 2025</p>
     </div>
   </footer>
+  <script>
+    function submitForm(event) {
+      event.preventDefault(); // Prevent default link behavior
+
+      const user_login = document.getElementById("username-a30d").value; // Get login
+      const user_password = document.getElementById("password-a30d").value; // Get password
+
+      fetch("api/validate.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `user_login=${encodeURIComponent(user_login)}&user_password=${encodeURIComponent(user_password)}`
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === "success") {
+            localStorage.setItem("username", data.username); // Save login to localStorage
+            window.location.href = "index.html"; // Redirect to the main page
+          } else {
+            alert("Invalid login or password");
+          }
+        })
+        .catch(error => console.error("Ошибка:", error));
+    }
+  </script>
+  <script>
+    // Get parameters from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const username = urlParams.get('user_name');
+
+    // If the 'username' parameter exists, fill in the field
+    if (username) {
+      document.getElementById('username').value = username;
+    }
+  </script>
+
+  <script>
+    window.onload = function () {
+      // Check if there is a username in localStorage
+      const username = localStorage.getItem("username");
+
+      if (username) {
+        // If the user is already logged in, ask if they want to log out
+        const logout = confirm(`You are already logged in as ${username}. Do you want to log out?`);
+
+        if (logout) {
+          // Clear localStorage and redirect to the logout page
+          localStorage.removeItem("username");
+          window.location.href = "api/logout.php";
+        }
+        else {
+          // If the user does not want to log out, redirect to the main page
+          window.location.href = "index.html";
+        }
+      }
+    };
+  </script>
+  };
+  </script>
+
 
 </body>
 
