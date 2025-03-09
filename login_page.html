@@ -142,13 +142,16 @@
       <p class="u-small-text u-text u-text-variant u-text-1"> Software Project Engineering RGU 2025</p>
     </div>
   </footer>
+
   <script>
+    // Функция для отправки формы
     function submitForm(event) {
-      event.preventDefault(); // Prevent default link behavior
+      event.preventDefault(); // Остановить стандартное поведение ссылки
 
-      const user_login = document.getElementById("username-a30d").value; // Get login
-      const user_password = document.getElementById("password-a30d").value; // Get password
+      const user_login = document.getElementById("username-a30d").value; // Получаем логин
+      const user_password = document.getElementById("password-a30d").value; // Получаем пароль
 
+      // Отправка данных на сервер
       fetch("api/validate.php", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -157,49 +160,55 @@
         .then(response => response.json())
         .then(data => {
           if (data.status === "success") {
-            localStorage.setItem("username", data.username); // Save login to localStorage
-            window.location.href = "index.html"; // Redirect to the main page
+            localStorage.setItem("username", data.username); // Сохраняем логин в localStorage
+            window.location.href = "index.html"; // Перенаправляем на главную страницу
           } else {
             alert("Invalid login or password");
           }
         })
         .catch(error => console.error("Ошибка:", error));
     }
-  </script>
-  <script>
-    // Get parameters from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const username = urlParams.get('user_name');
 
-    // If the 'username' parameter exists, fill in the field
-    if (username) {
-      document.getElementById('username').value = username;
-    }
-  </script>
+    // Функция для заполнения логина из параметров URL
+    function fillUsernameFromURL() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const username = urlParams.get('user_name');
 
-  <script>
-    window.onload = function () {
-      // Check if there is a username in localStorage
-      const username = localStorage.getItem("username");
-
+      // Если параметр 'user_name' существует, заполняем поле логина
       if (username) {
-        // If the user is already logged in, ask if they want to log out
-        const logout = confirm(`You are already logged in as ${username}. Do you want to log out?`);
-
-        if (logout) {
-          // Clear localStorage and redirect to the logout page
-          localStorage.removeItem("username");
-          window.location.href = "api/logout.php";
-        }
-        else {
-          // If the user does not want to log out, redirect to the main page
-          window.location.href = "index.html";
-        }
+        document.getElementById('username-a30d').value = username;
       }
-    };
+    }
+
+    // Функция для проверки состояния входа в localStorage
+    function checkLoginStatus() {
+      window.onload = function () {
+        // Проверяем, есть ли логин в localStorage
+        const username = localStorage.getItem("username");
+
+        if (username) {
+          // Если пользователь уже вошел, спрашиваем, хочет ли он выйти
+          const logout = confirm(`You are already logged in as ${username}. Do you want to log out?`);
+
+          if (logout) {
+            // Очищаем localStorage и переходим на страницу выхода
+            localStorage.removeItem("username");
+            window.location.href = "api/logout.php";
+          }
+          else {
+            // Если пользователь не хочет выйти, переходим на главную страницу
+            window.location.href = "index.html";
+          }
+        }
+      };
+    }
+
+    // Заполняем поле с логином из URL
+    fillUsernameFromURL();
+    // Проверяем состояние входа
+    checkLoginStatus();
   </script>
-  };
-  </script>
+
 
 
 </body>
