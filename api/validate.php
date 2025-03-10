@@ -20,11 +20,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Устанавливаем данные в сессии
         $_SESSION['user_id'] = $existing_user['id'];
-        $_SESSION['user_name'] = $existing_user['user_name'];
-        $_SESSION['user_role'] = $existing_user['user_role'];
-
-        header('Content-Type: application/json');
-        echo json_encode(['status' => 'success', 'username' => $existing_user['user_name']]);
+        $_SESSION['user_login'] = $existing_user['user_login'];
+        if ($existing_user['is_admin']) {
+            // Если админ, добавляем роль в сессию
+            $_SESSION['user_role'] = 'admin';
+            echo json_encode(['status' => 'success', 'user_login' => $existing_user['user_login'], 'role' => 'admin']);
+        } else {
+            // Если обычный пользователь, добавляем роль в сессию
+            $_SESSION['user_role'] = 'user';
+            echo json_encode(['status' => 'success', 'user_login' => $existing_user['user_login'], 'role' => 'user']);
+        }
         exit();
     } else {
         header('Content-Type: application/json');

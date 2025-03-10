@@ -9,7 +9,6 @@ include 'db.php'; // Database connection
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Get data from POST
     $user_login = $_POST['user_login'];
-    $user_name = $_POST['user_name'];
     $user_email = $_POST['user_email'];
     $user_password = $_POST['user_password'];
 
@@ -33,31 +32,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Prepare the insert query
-    $sql = "INSERT INTO db_users (user_login, user_name, user_email, user_password) VALUES (:user_login, :user_name, :user_email, :user_password)";
+    $sql = "INSERT INTO db_users (user_login, user_email, user_password, is_admin) VALUES (:user_login, :user_email, :user_password, :is_admin)";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':user_login', $user_login);
-    $stmt->bindParam(':user_name', $user_name);
     $stmt->bindParam(':user_email', $user_email);
     $stmt->bindParam(':user_password', $user_password);
+    $isAdmin = 0; // По умолчанию - не админ
+    if ($role === 'admin') {
+        $isAdmin = 1; // Если роль - админ, присваиваем 1
+    }
+    $stmt->bindParam(':is_admin', $isAdmin, PDO::PARAM_BOOL);
 
     // Execute the query
     if ($stmt->execute()) {
-        // Add the role
-        $user_id = $pdo->lastInsertId(); // Get the ID of the last inserted user!!!!
-
-
-        // if the role is admin, add the admin role
-        if ($role === 'admin') {
-            $sql_admin = "INSERT INTO user_roles (user_id, role_id) VALUES (:user_id, 2)";
-            $stmt_admin = $pdo->prepare($sql_admin);
-            $stmt_admin->bindParam(':user_id', $user_id);
-            $stmt_admin->execute();
-        } else {
-            $sql_admin = "INSERT INTO user_roles (user_id, role_id) VALUES (:user_id, 1)";
-            $stmt_admin = $pdo->prepare($sql_admin);
-            $stmt_admin->bindParam(':user_id', $user_id);
-            $stmt_admin->execute();
-        }
+        // Get the ID of the last inserted user
+        $user_id = $pdo->lastInsertId();
 
         // Add the security question
         $sql_security = "INSERT INTO user_security_questions (user_id, question, answer) VALUES (:user_id, :security_question, :security_answer)";

@@ -10,8 +10,7 @@
   <link rel="stylesheet" href="nicepage.css" media="screen">
   <link rel="stylesheet" href="login_page.css" media="screen">
   <script class="u-script" type="text/javascript" src="jquery-1.9.1.min.js" defer=""></script>
-  <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
-  <meta name="generator" content="Nicepage 7.5.3, nicepage.com">
+
   <link rel="icon" href="images/favicon.jpg">
 
 
@@ -104,28 +103,23 @@
 
         <!-- <form action="api/validate.php" method="post" source="custom" -->
         <form id="login_form" class="u-clearfix u-form-custom-backend u-form-spacing-10 u-form-vertical u-inner-form"
-          source="custom" name="form" style="padding: 10px;" method="post"><!--login_form_usernameGroup-->
-          <div class="u-form-group u-form-name"><!--login_form_usernameLabel-->
-            <label class="u-label">Username *</label><!--/login_form_usernameLabel--><!--login_form_username-->
-            <input type="text" placeholder="Enter your Username" id="username" name="username"
-              class="u-input u-input-rectangle u-none u-input-1" required=""><!--/login_form_username-->
-          </div><!--/login_form_usernameGroup--><!--login_form_passwordGroup-->
-          <div class="u-form-group u-form-password"><!--login_form_passwordLabel-->
-            <label class="u-label">Password *</label><!--/login_form_passwordLabel--><!--login_form_password-->
-            <input type="text" placeholder="Enter your Password" id="password-a30d" name="password"
-              class="u-input u-input-rectangle u-none u-input-2" required=""><!--/login_form_password-->
-          </div><!--/login_form_passwordGroup--><!--login_form_rememberGroup-->
-          <!--login_form_submit-->
+          source="custom" name="form" style="padding: 10px;" method="post">
+          <div class="u-form-group u-form-name">
+            <label class="u-label">Username *</label>
+            <input type="text" placeholder="Enter your Username" id="user_login" name="username"
+              class="u-input u-input-rectangle u-none u-input-1" required="">
+          </div>
+          <div class="u-form-group u-form-password">
+            <label class="u-label">Password *</label>
+            <input type="text" placeholder="Enter your Password" id="user_password" name="password"
+              class="u-input u-input-rectangle u-none u-input-2" required="">
+          </div>
           <div class="u-align-left u-form-group u-form-submit">
             <a href="#" class="u-btn u-btn-submit u-button-style u-btn-1" onclick="submitForm(event)">Login</a>
-            <!-- <input type="submit" value="submit" class="u-form-control-hidden"> -->
-
-          </div><!--/login_form_submit-->
+          </div>
           <input type="hidden" value="" name="recaptchaResponse">
-        </form><!--/login_form_inner-->
-
-
-      </div><!--/login_form--><!--login_form_forgot_password-->
+        </form>
+      </div>
       <a href="forgotten_password.html"
         class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-btn u-button-style u-login-control u-login-forgot-password u-none u-text-palette-1-base u-btn-2">Forgot
         password?</a><!--/login_form_forgot_password--><!--login_form_create_account-->
@@ -148,20 +142,31 @@
     function submitForm(event) {
       event.preventDefault(); // Остановить стандартное поведение ссылки
 
-      const user_login = document.getElementById("username-a30d").value; // Получаем логин
-      const user_password = document.getElementById("password-a30d").value; // Получаем пароль
+      const user_login = document.getElementById("user_login").value; // Получаем логин
+      const user_password = document.getElementById("user_password").value; // Получаем пароль
+
+      const formData = new URLSearchParams();
+      formData.append("user_login", user_login);
+      formData.append("user_password", user_password);
 
       // Отправка данных на сервер
       fetch("api/validate.php", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `user_login=${encodeURIComponent(user_login)}&user_password=${encodeURIComponent(user_password)}`
+        body: formData.toString()
       })
         .then(response => response.json())
         .then(data => {
           if (data.status === "success") {
-            localStorage.setItem("username", data.username); // Сохраняем логин в localStorage
-            window.location.href = "index.html"; // Перенаправляем на главную страницу
+            // Сохраняем логин в localStorage
+            localStorage.setItem("user_login", data.user_login);
+
+            // Перенаправляем в зависимости от роли
+            if (data.role === "admin") {
+              window.location.href = "../admin_page.html"; // Перенаправляем на страницу администратора
+            } else {
+              window.location.href = "../index.html"; // Перенаправляем на страницу пользователя
+            }
           } else {
             alert("Invalid login or password");
           }
@@ -172,7 +177,7 @@
     // Функция для заполнения логина из параметров URL
     function fillUsernameFromURL() {
       const urlParams = new URLSearchParams(window.location.search);
-      const username = urlParams.get('user_login');
+      const username = urlParams.get('username');
 
       // Если параметр 'user_name' существует, заполняем поле логина
       if (username) {

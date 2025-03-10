@@ -601,12 +601,12 @@
   <script>
     document.addEventListener("DOMContentLoaded", function () {
 
-      const username = localStorage.getItem("username"); // Get from localStorage
+      const user_login = localStorage.getItem("user_login"); // Get from localStorage
 
-      if (username) {
-        document.getElementById("logged_user").textContent = "Logged in: " + username;
+      if (user_login) {
+        document.getElementById("logged_user").textContent = "Logged in: " + user_login;
         //loggedUser.href = "#"; // change to profile page if I have time to make it
-        document.getElementById('username').textContent = "Welcome " + username;
+        document.getElementById('username').textContent = "Welcome " + user_login;
       }
     });
 
