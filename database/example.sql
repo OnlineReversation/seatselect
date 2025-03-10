@@ -1,27 +1,14 @@
 USE db_seat_select;
 
-INSERT INTO db_users (user_login, user_password, user_name, user_email)
+INSERT INTO db_users (user_login, user_password, user_email, is_admin)
 VALUES 
-    ('Ganna', 'qwerty', 'Ganna RGU', 'ganna@example.com'),
-    ('Timi', 'qwerty', 'Timi RGU', 'timi@example.com'),
-    ('Ameer', 'qwerty', 'Ameer RGU', 'ameer@example.com'),
-    ('Sai', 'qwerty', 'Sai RGU', 'sai@example.com'),
-    ('Ekene', 'qwerty', 'Ekene RGU', 'ekene@example.com'),
-    ('Lucy', 'qwerty', 'Lucy RGU', 'lucy@example.com');
+    ('Ganna', 'qwerty', 'ganna@example.com', true),
+    ('Timi', 'qwerty', 'timi@example.com', true),
+    ('Ameer', 'qwerty', 'ameer@example.com', true),
+    ('Sai', 'qwerty', 'sai@example.com', true),
+    ('Ekene', 'qwerty', 'ekene@example.com', true),
+    ('Lucy', 'qwerty', 'lucy@example.com', true);
 
-INSERT INTO roles (role_name) 
-VALUES 
-	('admin'),
-	('user');
-	
-INSERT INTO user_roles (user_id, role_id) 
-VALUES 
-	(1,1),
-	(1,2),
-	(2,2),
-	(3,2),
-	(4,2),
-	(5,2);	
 	
 INSERT INTO restaurant_tables (capacity) 
 VALUES 
