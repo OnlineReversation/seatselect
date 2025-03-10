@@ -13,7 +13,7 @@ function refresh_users() {
                     <td>${user.user_login}</td>
                     <td>${user.user_email}</td>
                     <td>
-                        <button onclick="openForm(${user.id})">Change password</button>
+                        <button onclick="changePassword(${user.id})">Change password</button>
                     </td>
                 </tr>`;
         tableBody.innerHTML += row;
@@ -25,10 +25,34 @@ function refresh_users() {
   });
 }
 
-function openForm(userId) {
-  window.location.href = `form_page.html?user_id=${userId}`;
+function changePassword(userId) {
+  const newPassword = prompt("Enter the new password:");
+
+  if (newPassword && newPassword.length >= 3) {
+    // Минимальная длина пароля - 3 символов
+    fetch("api/change_password.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `user_id=${encodeURIComponent(
+        userId
+      )}&new_password=${encodeURIComponent(newPassword)}`,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "success") {
+          alert("Password successfully changed!");
+        } else {
+          alert("Error changing password: " + data.message);
+        }
+      })
+      .catch((error) => console.error("Error:", error));
+  } else {
+    alert("Password should be at least 3 characters long.");
+  }
 }
+
 
 document.addEventListener("DOMContentLoaded", function () {
   refresh_users();
 });
+

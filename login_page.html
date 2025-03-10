@@ -160,6 +160,7 @@
           if (data.status === "success") {
             // Сохраняем логин в localStorage
             localStorage.setItem("user_login", data.user_login);
+            localStorage.setItem("user_role", data.role);
 
             // Перенаправляем в зависимости от роли
             if (data.role === "admin") {
@@ -177,11 +178,11 @@
     // Функция для заполнения логина из параметров URL
     function fillUsernameFromURL() {
       const urlParams = new URLSearchParams(window.location.search);
-      const username = urlParams.get('username');
+      const user_login = urlParams.get('user_login');
 
-      // Если параметр 'user_name' существует, заполняем поле логина
-      if (username) {
-        document.getElementById('username').value = username;
+      // Если параметр 'user_login' существует, заполняем поле логина
+      if (user_login) {
+        document.getElementById('user_login').value = user_login;
       }
     }
 
@@ -189,20 +190,25 @@
     function checkLoginStatus() {
       window.onload = function () {
         // Проверяем, есть ли логин в localStorage
-        const username = localStorage.getItem("username");
+        const user_login = localStorage.getItem("user_login");
+        const user_role = localStorage.getItem("user_role");
 
-        if (username) {
+        if (user_login) {
           // Если пользователь уже вошел, спрашиваем, хочет ли он выйти
-          const logout = confirm(`You are already logged in as ${username}. Do you want to log out?`);
+          const logout = confirm(`You are already logged in as ${user_login}. Do you want to log out?`);
 
           if (logout) {
             // Очищаем localStorage и переходим на страницу выхода
-            localStorage.removeItem("username");
+            localStorage.removeItem("user_login");
+            localStorage.removeItem("user_role");
             window.location.href = "api/logout.php";
-          }
-          else {
-            // Если пользователь не хочет выйти, переходим на главную страницу
-            window.location.href = "index.html";
+          } else {
+            // Перенаправление в зависимости от роли
+            if (user_role === "admin") {
+              window.location.href = "admin_page.html";
+            } else {
+              window.location.href = "index.html";
+            }
           }
         }
       };
