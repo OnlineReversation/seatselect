@@ -101,10 +101,13 @@
   <section class="u-clearfix u-section-1" id="block-1">
     <div class="u-clearfix u-sheet u-sheet-1">
       <div class="u-form u-form-1">
-        
-        <form action="https://forms.nicepagesrv.com/v2/form/process"
+
+        <form action="api/add_booking.php" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form"
+          name="form" style="padding: 10px;">
+
+          <!-- <form action="https://forms.nicepagesrv.com/v2/form/process"
           class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="email" name="form"
-          style="padding: 10px;" redirect="true" redirect-address="/home_page.html">
+          style="padding: 10px;" redirect="true" redirect-address="/home_page.html"> -->
           <div class="u-form-date u-form-group u-form-group-1">
             <label class="u-label">Date</label>
             <input type="text" placeholder="ММ/ДД/ГГГГ" id="date-834c" name="date" class="u-input u-input-rectangle"
@@ -167,11 +170,7 @@
             <a href="#" class="u-btn u-btn-submit u-button-style">Book </a>
             <input type="submit" value="submit" class="u-form-control-hidden">
           </div>
-          <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
-          <div class="u-form-send-error u-form-send-message"> Sending failed. Please correct the errors and try again.
-          </div>
-          <input type="hidden" value="" name="recaptchaResponse">
-          <input type="hidden" name="formServices" value="ea61a380-2733-bb38-9edd-bc1425b2f1f8">
+
         </form>
       </div>
       <img class="u-hidden-md u-hidden-xs u-image u-image-default u-image-1" src="images/Tablefor2-1.jpg" alt=""
