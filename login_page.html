@@ -107,7 +107,7 @@
           source="custom" name="form" style="padding: 10px;" method="post"><!--login_form_usernameGroup-->
           <div class="u-form-group u-form-name"><!--login_form_usernameLabel-->
             <label class="u-label">Username *</label><!--/login_form_usernameLabel--><!--login_form_username-->
-            <input type="text" placeholder="Enter your Username" id="username-a30d" name="username"
+            <input type="text" placeholder="Enter your Username" id="username" name="username"
               class="u-input u-input-rectangle u-none u-input-1" required=""><!--/login_form_username-->
           </div><!--/login_form_usernameGroup--><!--login_form_passwordGroup-->
           <div class="u-form-group u-form-password"><!--login_form_passwordLabel-->
@@ -172,11 +172,11 @@
     // Функция для заполнения логина из параметров URL
     function fillUsernameFromURL() {
       const urlParams = new URLSearchParams(window.location.search);
-      const username = urlParams.get('user_name');
+      const username = urlParams.get('user_login');
 
       // Если параметр 'user_name' существует, заполняем поле логина
       if (username) {
-        document.getElementById('username-a30d').value = username;
+        document.getElementById('username').value = username;
       }
     }
 

@@ -45,15 +45,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Add the role
         $user_id = $pdo->lastInsertId(); // Get the ID of the last inserted user!!!!
 
-        // every user is a user
-        $sql_role = "INSERT INTO user_roles (user_id, role_id) VALUES (:user_id, 1)";
-        $stmt_role = $pdo->prepare($sql_role);
-        $stmt_role->bindParam(':user_id', $user_id);
-        $stmt_role->execute();
 
         // if the role is admin, add the admin role
         if ($role === 'admin') {
             $sql_admin = "INSERT INTO user_roles (user_id, role_id) VALUES (:user_id, 2)";
+            $stmt_admin = $pdo->prepare($sql_admin);
+            $stmt_admin->bindParam(':user_id', $user_id);
+            $stmt_admin->execute();
+        } else {
+            $sql_admin = "INSERT INTO user_roles (user_id, role_id) VALUES (:user_id, 1)";
             $stmt_admin = $pdo->prepare($sql_admin);
             $stmt_admin->bindParam(':user_id', $user_id);
             $stmt_admin->execute();
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // echo json_encode(['status' => 'success', 'message' => 'User added successfully.']);
         // back to the login page
-        header("Location: ../login_page.html?username=" . urlencode($user_name));
+        header("Location: ../login_page.html?username=" . urlencode($user_login));
         exit();
     } else {
         echo json_encode(['status' => 'error', 'message' => 'Error: ' . $stmt->errorInfo()]);

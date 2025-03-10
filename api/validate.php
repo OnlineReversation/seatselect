@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Устанавливаем данные в сессии
         $_SESSION['user_id'] = $existing_user['id'];
         $_SESSION['user_name'] = $existing_user['user_name'];
-        // $_SESSION['user_role'] = $existing_user['user_role'];
+        $_SESSION['user_role'] = $existing_user['user_role'];
 
         header('Content-Type: application/json');
         echo json_encode(['status' => 'success', 'username' => $existing_user['user_name']]);
