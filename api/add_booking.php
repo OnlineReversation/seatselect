@@ -6,7 +6,8 @@ session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
-    die("User not authorized.");
+    header("Location: ../login_page.html");
+    exit();
 }
 
 $user_id = $_SESSION['user_id']; // User ID from session
@@ -60,7 +61,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $insertStmt->execute();
 
-                echo "Reservation successfully created! Table ID: $table_id.";
+                header("Location: ../confirmation.html?table_id=" . urlencode($table_id) . "&user_id=" . urlencode($user_id) . "&reservation_date=" . urlencode($reservation_date) . "&reservation_time=" . urlencode($reservation_time) . "&number=" . urlencode($number));
+                exit();
+                // echo "Reservation successfully created! Table ID: $table_id.";
             } else {
                 echo "No available tables with capacity $number at the specified time.";
             }
