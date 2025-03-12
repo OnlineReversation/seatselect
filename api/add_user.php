@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // echo json_encode(['status' => 'success', 'message' => 'User added successfully.']);
         // back to the login page
-        header("Location: ../login_page.html?username=" . urlencode($user_login));
+        header("Location: ../login_page.html?user_login=" . urlencode($user_login));
         exit();
     } else {
         echo json_encode(['status' => 'error', 'message' => 'Error: ' . $stmt->errorInfo()]);
