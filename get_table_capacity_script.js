@@ -2,8 +2,7 @@
  Date: 2025-03-03 20:19
 */
 
-const API_URL_GET_TABLE_CAPACITY =
-  "http://coursework.local/api/get_table_capacity.php";
+const API_URL_GET_TABLE_CAPACITY = "/api/get_table_capacity.php";
 
 function getTables() {
   // Отправка запроса на сервер для получения данных о столиках

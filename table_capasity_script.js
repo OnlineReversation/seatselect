@@ -2,7 +2,7 @@
  Date: 2025-03-03 11:56
  manual from here https://learn.javascript.ru/fetch
 */
-const API_URL_SAVE_TABLES = "http://coursework.local/api/save_tables.php";
+const API_URL_SAVE_TABLES = "/api/save_tables.php";
 
 function submitTables() {
   let tables = document.querySelectorAll(".restaurant_table");
