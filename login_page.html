@@ -104,14 +104,16 @@
         <!-- <form action="api/validate.php" method="post" source="custom" -->
         <form id="login_form" class="u-clearfix u-form-custom-backend u-form-spacing-10 u-form-vertical u-inner-form"
           source="custom" name="form" style="padding: 10px;" method="post">
+
+
           <div class="u-form-group u-form-name">
             <label class="u-label">Username *</label>
             <input type="text" placeholder="Enter your Username" id="user_login" name="username"
               class="u-input u-input-rectangle u-none u-input-1" required="">
           </div>
           <div class="u-form-group u-form-password">
-            <label class="u-label">Password *</label>
-            <input type="text" placeholder="Enter your Password" id="user_password" name="password"
+            <label class="u-label" id="password-label">Password *</label>
+            <input type="password" placeholder="Enter your Password" id="user_password" name="password"
               class="u-input u-input-rectangle u-none u-input-2" required="">
           </div>
           <div class="u-align-left u-form-group u-form-submit">
@@ -136,20 +138,19 @@
       <p class="u-small-text u-text u-text-variant u-text-1"> Software Project Engineering RGU 2025</p>
     </div>
   </footer>
-
   <script>
-    // Функция для отправки формы
+    // Function to submit the form
     function submitForm(event) {
-      event.preventDefault(); // Остановить стандартное поведение ссылки
+      event.preventDefault(); // Prevent default link behavior
 
-      const user_login = document.getElementById("user_login").value; // Получаем логин
-      const user_password = document.getElementById("user_password").value; // Получаем пароль
+      const user_login = document.getElementById("user_login").value; // Get username
+      const user_password = document.getElementById("user_password").value; // Get password
 
       const formData = new URLSearchParams();
       formData.append("user_login", user_login);
       formData.append("user_password", user_password);
 
-      // Отправка данных на сервер
+      // Send data to the server
       fetch("api/validate.php", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -158,52 +159,60 @@
         .then(response => response.json())
         .then(data => {
           if (data.status === "success") {
-            // Сохраняем логин в localStorage
+            // Save username in localStorage
             localStorage.setItem("user_login", data.user_login);
             localStorage.setItem("user_role", data.role);
 
-            // Перенаправляем в зависимости от роли
+            // Redirect based on role
             if (data.role === "admin") {
-              window.location.href = "../admin_page.html"; // Перенаправляем на страницу администратора
+              window.location.href = "../admin_page.html"; // Redirect to admin page
             } else {
-              window.location.href = "../index.html"; // Перенаправляем на страницу пользователя
+              window.location.href = "../index.html"; // Redirect to user page
             }
           } else {
             alert("Invalid login or password");
           }
         })
-        .catch(error => console.error("Ошибка:", error));
+        .catch(error => console.error("Error:", error));
     }
 
-    // Функция для заполнения логина из параметров URL
+    // Function to populate username from URL parameters
     function fillUsernameFromURL() {
       const urlParams = new URLSearchParams(window.location.search);
       const user_login = urlParams.get('user_login');
+      const message = urlParams.get('message');
 
-      // Если параметр 'user_login' существует, заполняем поле логина
+      // If 'user_login' parameter exists, populate the username field
       if (user_login) {
         document.getElementById('user_login').value = user_login;
       }
+
+      if (message) {
+
+        document.getElementById('password-label').innerText = message;
+
+        document.getElementById('user_password').style.borderColor = 'red';
+      }
     }
 
-    // Функция для проверки состояния входа в localStorage
+    // Function to check login status in localStorage
     function checkLoginStatus() {
       window.onload = function () {
-        // Проверяем, есть ли логин в localStorage
+        // Check if username exists in localStorage
         const user_login = localStorage.getItem("user_login");
         const user_role = localStorage.getItem("user_role");
 
         if (user_login) {
-          // Если пользователь уже вошел, спрашиваем, хочет ли он выйти
+          // If user is already logged in, ask if they want to log out
           const logout = confirm(`You are already logged in as ${user_login}. Do you want to log out?`);
 
           if (logout) {
-            // Очищаем localStorage и переходим на страницу выхода
+            // Clear localStorage and navigate to logout page
             localStorage.removeItem("user_login");
             localStorage.removeItem("user_role");
             window.location.href = "api/logout.php";
           } else {
-            // Перенаправление в зависимости от роли
+            // Redirect based on role
             if (user_role === "admin") {
               window.location.href = "admin_page.html";
             } else {
@@ -213,11 +222,10 @@
         }
       };
     }
-    // Проверяем состояние входа
+    // Check login status
     checkLoginStatus();
-    // Заполняем поле с логином из URL
+    // Populate username field from URL
     fillUsernameFromURL();
-
   </script>
 
 
