@@ -1,8 +1,7 @@
 <?php
 /* Author: Ganna Karpycheva
  Date: 2025-03-01 10:00
- manual: https://metanit.com/php/mysql/2.1.php
-*/
+ */
 $host = 'databasess.cvwwyq4ws4kg.eu-west-2.rds.amazonaws.com';
 $dbname = 'db_seat_select';
 $username = 'admin';
