@@ -32,6 +32,11 @@
   margin: 20px auto 0;
 }
 
+.u-section-1 .u-btn-1 {
+  background-image: none;
+  padding: 0;
+}
+
 .u-section-1 .u-text-2 {
   margin: 20px auto 0;
 }
@@ -52,6 +57,11 @@
 
 .u-section-1 .u-text-3 {
   margin: 20px auto 0;
+}
+
+.u-section-1 .u-btn-2 {
+  background-image: none;
+  padding: 0;
 }
 
 .u-section-1 .u-text-4 {
@@ -76,6 +86,11 @@
   margin: 20px auto 0;
 }
 
+.u-section-1 .u-btn-3 {
+  background-image: none;
+  padding: 0;
+}
+
 .u-section-1 .u-text-6 {
   margin: 20px auto 0;
 }
@@ -96,6 +111,11 @@
 
 .u-section-1 .u-text-7 {
   margin: 20px auto 0;
+}
+
+.u-section-1 .u-btn-4 {
+  background-image: none;
+  padding: 0;
 }
 
 .u-section-1 .u-text-8 {
