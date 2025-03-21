@@ -112,34 +112,34 @@
           </colgroup>
           <tbody class="u-table-body">
             <tr style="height: 64px">
-              <td class="u-border-1 u-border-grey-30 u-table-cell">Table for 2</td>
-              <td class="u-border-1 u-border-grey-30 u-table-cell">Table for 4</td>
-              <td class="u-border-1 u-border-grey-30 u-table-cell">Table for 6</td>
-              <td class="u-border-1 u-border-grey-30 u-table-cell">Table for 12</td>
+              <td id="table_1" class="u-border-1 u-border-grey-30 u-table-cell">Table for 2</td>
+              <td id="table_2" class="u-border-1 u-border-grey-30 u-table-cell">Table for 4</td>
+              <td id="table_3" class="u-border-1 u-border-grey-30 u-table-cell">Table for 6</td>
+              <td id="table_4" class="u-border-1 u-border-grey-30 u-table-cell">Table for 12</td>
             </tr>
             <tr style="height: 65px">
-              <td class="u-border-1 u-border-grey-30 u-table-cell">Table for 2</td>
-              <td class="u-border-1 u-border-grey-30 u-table-cell">Table for 4</td>
-              <td class="u-border-1 u-border-grey-30 u-table-cell">Table for 6</td>
-              <td class="u-border-1 u-border-grey-30 u-table-cell">Table for 12</td>
+              <td id="table_5" class="u-border-1 u-border-grey-30 u-table-cell">Table for 2</td>
+              <td id="table_6" class="u-border-1 u-border-grey-30 u-table-cell">Table for 4</td>
+              <td id="table_7" class="u-border-1 u-border-grey-30 u-table-cell">Table for 6</td>
+              <td id="table_8" class="u-border-1 u-border-grey-30 u-table-cell">Table for 12</td>
             </tr>
             <tr style="height: 65px">
-              <td class="u-border-1 u-border-grey-30 u-table-cell">Table for 2</td>
-              <td class="u-border-1 u-border-grey-30 u-table-cell">Table for 4</td>
-              <td class="u-border-1 u-border-grey-30 u-table-cell">Table for 6</td>
-              <td class="u-border-1 u-border-grey-30 u-table-cell">Table for 12</td>
+              <td id="table_9" class="u-border-1 u-border-grey-30 u-table-cell">Table for 2</td>
+              <td id="table_10" class="u-border-1 u-border-grey-30 u-table-cell">Table for 4</td>
+              <td id="table_11" class="u-border-1 u-border-grey-30 u-table-cell">Table for 6</td>
+              <td id="table_12" class="u-border-1 u-border-grey-30 u-table-cell">Table for 12</td>
             </tr>
             <tr style="height: 65px">
-              <td class="u-border-1 u-border-grey-30 u-table-cell">Table for 2</td>
-              <td class="u-border-1 u-border-grey-30 u-table-cell">Table for 4</td>
-              <td class="u-border-1 u-border-grey-30 u-table-cell">Table for 6</td>
-              <td class="u-border-1 u-border-grey-30 u-table-cell">Table for 12</td>
+              <td id="table_13" class="u-border-1 u-border-grey-30 u-table-cell">Table for 2</td>
+              <td id="table_14" class="u-border-1 u-border-grey-30 u-table-cell">Table for 4</td>
+              <td id="table_15" class="u-border-1 u-border-grey-30 u-table-cell">Table for 6</td>
+              <td id="table_16" class="u-border-1 u-border-grey-30 u-table-cell">Table for 12</td>
             </tr>
             <tr style="height: 65px">
-              <td class="u-border-1 u-border-grey-30 u-table-cell">Table for 2</td>
-              <td class="u-border-1 u-border-grey-30 u-table-cell">Table for 4</td>
-              <td class="u-border-1 u-border-grey-30 u-table-cell">Table for 6</td>
-              <td class="u-border-1 u-border-grey-30 u-table-cell">Table for 12</td>
+              <td id="table_17" class="u-border-1 u-border-grey-30 u-table-cell">Table for 2</td>
+              <td id="table_18" class="u-border-1 u-border-grey-30 u-table-cell">Table for 4</td>
+              <td id="table_19" class="u-border-1 u-border-grey-30 u-table-cell">Table for 6</td>
+              <td id="table_20" class="u-border-1 u-border-grey-30 u-table-cell">Table for 12</td>
             </tr>
           </tbody>
         </table>
@@ -160,13 +160,90 @@
                     style="padding: 10px">
                     <div class="u-form-date u-form-group u-form-group-1">
                       <label class="u-label">Date</label>
-                      <input type="text" placeholder="ММ/DD/YYYY" id="date-834c" name="date"
-                        class="u-input u-input-rectangle" required="" data-date-format="mm/dd/yyyy" />
+                      <input type="text" placeholder="DD-MM-YYYY" id="date-834c" name="date"
+                        class="u-input u-input-rectangle" required="" data-date-format="dd-mm-yyyy" />
                     </div>
-                    <div class="u-form-group u-form-time u-form-group-2">
+
+                    <!-- <div class="u-form-group u-form-time u-form-group-2">
                       <label class="u-label">Time</label>
                       <input type="time" id="time-c098" name="time" class="u-input u-input-rectangle" />
+                    </div> -->
+
+                    <div class="u-form-group u-form-number u-form-number-layout-range-number u-form-group-2">
+                      <label class="u-label">Time</label>
+                      <div class="u-input-row" data-value="10">
+                        <input value="10" type="range" id="range-74c1" name="range" class="u-input u-range" min="10"
+                          max="23" step="1"
+                          style="width: 100%; appearance: auto; height: 8px; background: #5043437f;  background-color: #888; cursor: pointer;">
+                        <input type="number" id="number-range-74c1" class="u-input u-input-rectangle u-text-black"
+                          min="10" max="23" step="1" value="10">
+                      </div>
+
+                      <script>
+                        const rangeInput = document.getElementById('range-74c1');
+                        const numberInput = document.getElementById('number-range-74c1');
+
+                        // Synchronize when range changes
+                        rangeInput.addEventListener('input', () => {
+                          numberInput.value = rangeInput.value;
+                        });
+
+                        // Synchronize when number changes
+                        numberInput.addEventListener('input', () => {
+                          if (numberInput.value >= 10 && numberInput.value <= 23) { // Limit just in case
+                            rangeInput.value = numberInput.value;
+                          }
+                        });
+                      </script>
                     </div>
+
+                    <!--  add getting data start -->
+                    <button type="submit" class="u-btn u-btn-primary" id="check-availability">Check
+                      Availability</button>
+                    <script>
+                      document.getElementById('check-availability').addEventListener('click', function (event) {
+                        event.preventDefault();
+
+                        const date = document.getElementById('date-834c').value;
+                        const time = document.getElementById('number-range-74c1').value;
+
+                        if (!date || !time) {
+                          alert('Please fill in both fields: Date and Time.');
+                          return;
+                        }
+
+                        fetch('api/check_availability.php', {
+                          method: 'POST',
+                          headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                          },
+                          body: `date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}`
+                        })
+                          .then(response => response.json())
+                          .then(data => {
+                            if (data.success) {
+                              data.reservedTables.forEach(tableId => {
+                                const cell = document.getElementById("table_" + tableId);
+                                if (cell) {
+                                  cell.textContent = "Reserved";
+                                  cell.style.color = "red";
+                                  cell.style.fontWeight = "bold";
+                                }
+                              });
+                            } else {
+                              alert("Failed to check availability. Please try again.");
+                            }
+                          })
+
+
+                          .catch(error => {
+                            console.error('Ошибка:', error);
+                            alert('Произошла ошибка. Попробуйте снова позже.');
+                          });
+                      });
+                    </script>
+                    <!-- Ganna add getting data end -->
+
                     <div class="u-form-group u-form-select u-form-group-3">
                       <label class="u-label">Table</label>
                       <div class="u-form-select-wrapper">
