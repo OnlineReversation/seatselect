@@ -82,6 +82,7 @@
     </div>
     <h2 class="submit-review-heading">Submit your review</h2>
     <form action="api/submit_review.php" method="post">
+        <!-- We will retrieve this ID from the session on the server -->
         <!-- <label for="user_id">User ID:</label><br>
         <select id="user_id" name="user_id" required>
             <option value="" disabled selected>Select your ID</option>
@@ -97,6 +98,9 @@
             <option value="10">User 10</option>
         </select><br><br> -->
 
+        <label for="username">Your name:</label>
+        <input type="text" id="username" name="username" value="New User">
+        <br><br>
         <label for="rating">Rating (1-5):</label><br>
         <div class="rating">
             <input type="radio" id="star5" name="rating" value="5" required><label for="star5"
@@ -109,7 +113,7 @@
                 title="2 stars">&#9733;</label>
             <input type="radio" id="star1" name="rating" value="1" required><label for="star1"
                 title="1 star">&#9733;</label>
-        </div><br><br>
+        </div><br>
 
         <label for="review_text">Review Text:</label><br>
         <textarea id="review_text" name="review_text" rows="5" cols="40" required></textarea><br><br>
@@ -118,9 +122,28 @@
         <input type="date" id="review_date" name="review_date" required><br><br>
 
         <input type="submit" value="Submit Review">
+        <br>
+        <a href="index.html">Back to Home page</a>
     </form>
+
+
+
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
     <script src="./review.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const user_login = localStorage.getItem("user_login"); // Get from localStorage
+
+            if (user_login) {
+                // document.getElementById("logged_user").textContent = "Logged in: " + user_login;
+
+                document.getElementById('username').value = "" + user_login;
+            }
+        });
+
+    </script>
 </body>
 
 </html>

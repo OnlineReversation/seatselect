@@ -1,18 +1,24 @@
 <?php
 require 'db.php';
 
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../login_page.html");
+    exit();
+}
+
+$user_id = $_SESSION['user_id']; // User ID from session
+
 try {
-/* Author: Ganna Karpycheva
- Date: 2025-03-16 22:55
- пока не работает, жду файла с запросом от Амира
-*/ 
-    // Retrieving data from the form
-    $user_id = (int)$_POST['user_id'];
-   
+
     // For now, it doesn't matter which table the review is for; later, table selection can be added
     // $table_id = (int)$_POST['table_id'];
     $table_id = 1;
-    $rating = (int)$_POST['rating'];
+
+    $rating = isset($_POST['rating']) ? (int)$_POST['rating'] : 0;
+
     $review_text = $_POST['review_text'];
     $review_date = $_POST['review_date'];
 
@@ -20,7 +26,7 @@ try {
     $sql = "INSERT INTO reviews (user_id, table_id, rating, review_text, review_date) 
             VALUES (:user_id, :table_id, :rating, :review_text, :review_date)";
 
-    $stmt = $conn->prepare($sql);
+    $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':user_id', $user_id);
     $stmt->bindParam(':table_id', $table_id);
     $stmt->bindParam(':rating', $rating);
@@ -29,10 +35,8 @@ try {
 
     $stmt->execute();
 
-    echo "<script>alert('Your feedback has been successfully submitted!'); window.location.href = 'index.html';</script>";
+     echo "<script>alert('Your feedback has been successfully submitted!'); window.location.href = '../review.html';</script>";
+    // echo "<script>alert('Your feedback has been successfully submitted!')";
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
-
-// Closing the connection
-$conn = null;
