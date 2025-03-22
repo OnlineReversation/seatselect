@@ -11,9 +11,7 @@
   <link rel="stylesheet" href="available_tables_page.css" media="screen" />
   <script class="u-script" type="text/javascript" src="jquery-1.9.1.min.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
-  <meta name="generator" content="Nicepage 7.4.1, nicepage.com" />
-  <meta name="referrer" content="origin" />
-  <link rel="icon" href="images/favicon.jpg" />
+
 
   <link id="u-theme-google-font" rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i" />
@@ -155,8 +153,7 @@
               <div class="u-container-layout u-container-layout-1">
                 <h3 class="u-align-left u-text u-text-default u-text-1">Book now</h3>
                 <div class="u-form u-form-1">
-                  <form action="https://forms.nicepagesrv.com/v2/form/process"
-                    class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="email" name="form"
+                  <form id="bookingForm" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" name="form"
                     style="padding: 10px">
                     <div class="u-form-date u-form-group u-form-group-1">
                       <label class="u-label">Date</label>
@@ -198,49 +195,47 @@
                     </div>
 
                     <!--  add getting data start -->
-                    <button type="submit" class="u-btn u-btn-primary" id="check-availability">Check
+                    <button type="button" class="u-btn u-btn-primary" id="check-availability"
+                      onclick="checkAvailability()">Check
                       Availability</button>
                     <script>
-                      document.getElementById('check-availability').addEventListener('click', function (event) {
-                        event.preventDefault();
-
+                      function checkAvailability() {
                         const date = document.getElementById('date-834c').value;
                         const time = document.getElementById('number-range-74c1').value;
 
-                        if (!date || !time) {
-                          alert('Please fill in both fields: Date and Time.');
-                          return;
-                        }
 
-                        fetch('api/check_availability.php', {
-                          method: 'POST',
-                          headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                          },
-                          body: `date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}`
-                        })
-                          .then(response => response.json())
-                          .then(data => {
-                            if (data.success) {
-                              data.reservedTables.forEach(tableId => {
-                                const cell = document.getElementById("table_" + tableId);
-                                if (cell) {
-                                  cell.textContent = "Reserved";
-                                  cell.style.color = "red";
-                                  cell.style.fontWeight = "bold";
-                                }
-                              });
-                            } else {
-                              alert("Failed to check availability. Please try again.");
-                            }
+                        if (date && time) {
+                          fetch('api/check_availability.php', {
+                            method: 'POST',
+                            headers: {
+                              'Content-Type': 'application/x-www-form-urlencoded'
+                            },
+                            body: `date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}`
                           })
+                            .then(response => response.json())
+                            .then(data => {
+                              if (data.success) {
+                                data.reservedTables.forEach(table => {
+                                  const cell = document.getElementById("table_" + table.table_id);
+                                  if (cell) {
+                                    cell.textContent = `Reserved (Table for: ${table.capacity})`;
+                                    cell.style.color = "red";
+                                    cell.style.fontWeight = "bold";
+                                  }
+                                });
+                              } else {
+                                alert("Failed to check availability. Please try again.");
+                              }
+                            })
+                            .catch(error => {
+                              console.error('Error:', error);
+                              alert('An error occurred. Please try again later.');
+                            });
+                        } else {
+                          alert('Please select a date and time.');
+                        }
+                      }
 
-
-                          .catch(error => {
-                            console.error('Ошибка:', error);
-                            alert('Произошла ошибка. Попробуйте снова позже.');
-                          });
-                      });
                     </script>
                     <!-- Ganna add getting data end -->
 
@@ -271,26 +266,19 @@
                     <div class="u-form-group u-form-message">
                       <label class="u-label">Message</label>
                       <textarea placeholder="Enter your message" id="message-535f" name="message"
-                        class="u-input u-input-rectangle" required=""></textarea>
+                        class="u-input u-input-rectangle"></textarea>
                     </div>
                     <div class="u-form-email u-form-group">
                       <label class="u-label">Email</label>
                       <input type="email" placeholder="email for confirmation" id="email-535f" name="email"
-                        class="u-input u-input-rectangle" required="" />
+                        class="u-input u-input-rectangle" />
                     </div>
                     <div class="u-align-left u-form-group u-form-submit">
                       <a href="#" class="u-btn u-btn-submit u-button-style">Book
                       </a>
                       <input type="submit" value="submit" class="u-form-control-hidden" />
                     </div>
-                    <div class="u-form-send-message u-form-send-success">
-                      Thank you your message has been sent.
-                    </div>
-                    <div class="u-form-send-error u-form-send-message">
-                      Sending failed. Please correct the errors and try again.
-                    </div>
-                    <input type="hidden" value="" name="recaptchaResponse" />
-                    <input type="hidden" name="formServices" value="ea61a380-2733-bb38-9edd-bc1425b2f1f8" />
+
                   </form>
                 </div>
               </div>
@@ -380,6 +368,7 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
     </div>
   </section>
   <script>
+    // Ekene's script
     document.addEventListener("DOMContentLoaded", function () {
       localStorage.removeItem("bookedTables");
       console.log("Script loaded");
@@ -442,6 +431,66 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
       </p>
     </div>
   </footer>
+
+  <script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+      // Функция для получения данных о вместимости столиков
+      fetch('api/get_table_capacity.php')
+        .then(response => response.text())  // Получаем данные как текст
+        .then(data => {
+          const params = new URLSearchParams(data); // Преобразуем данные в объект URLSearchParams
+
+          // Проходим по всем столикам и обновляем их вместимость
+          for (let i = 1; i <= 20; i++) {
+            const tableId = `table_${i}`;
+            const capacity = params.get(tableId); // Получаем вместимость для текущего столика
+            if (capacity) {
+              const tableCell = document.getElementById(tableId);
+              if (tableCell) {
+                tableCell.textContent = `Table for ${capacity}`; // Обновляем текст столика
+              }
+            }
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching table data:', error); // Логируем ошибку, если она произошла
+        });
+    });
+
+  </script>
+
+  <script>
+    /* 
+     sending data by fetch
+    */
+    document.getElementById('bookingForm').addEventListener('submit', async function (event) {
+      event.preventDefault(); // Disable default form submission
+
+      const form = event.target;
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch('api/add_booking_by_map.php', {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          window.open(data.url, '_blank'); // Open the page in a new tab
+        } else {
+          alert('Something went wrong. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while submitting the data.');
+      }
+    });
+
+
+  </script>
 </body>
 
 </html>
