@@ -165,6 +165,7 @@
                       <label class="u-label">Time</label>
                       <input type="time" id="time-c098" name="time" class="u-input u-input-rectangle" />
                     </div> -->
+                    <input type="hidden" name="choosen_table" id="choosen_table" value="0">
 
                     <div class="u-form-group u-form-number u-form-number-layout-range-number u-form-group-2">
                       <label class="u-label">Time</label>
@@ -215,6 +216,19 @@
                             .then(response => response.json())
                             .then(data => {
                               if (data.success) {
+
+
+
+                                data.tables.forEach(table => {
+                                  const empty_table = document.getElementById("table_" + table.id);
+                                  if (empty_table) {
+                                    empty_table.innerHTML = `<a href="#" onclick="bookTableById(${table.id}, ${table.capacity})">Available (Table for: ${table.capacity})</a>`;
+                                    empty_table.style.color = "green";
+                                    empty_table.style.fontWeight = "bold";
+                                  }
+                                });
+
+
                                 data.reservedTables.forEach(table => {
                                   const cell = document.getElementById("table_" + table.table_id);
                                   if (cell) {
@@ -236,6 +250,43 @@
                         }
                       }
 
+                      function bookTableById(tableId, capacity) {
+                        const date = document.getElementById('date-834c').value;
+                        const time = document.getElementById('number-range-74c1').value;
+
+                        if (!date || !time) {
+                          alert("Please select a date and time before booking.");
+                          return;
+                        }
+
+                        if (confirm(`Are you sure you want to book the table ${tableId}?`)) {
+                          ;
+                          // Дополнительная логика бронирования
+                          const choosen_table = document.getElementById('choosen_table');
+                          choosen_table.value = tableId;
+
+                          const choosen_capacity = document.getElementById('select-623e');
+                          choosen_capacity.value = `table_${capacity}`;
+
+                          const form = document.getElementById('bookingForm');
+
+                          //  объект события для отправки формы
+                          const event = { preventDefault: () => { }, target: form };
+
+                          //  submitBookingForm с этим объектом события
+                          submitBookingForm(event);
+                          alert(`Table ${tableId} is booked!`)
+
+                          // раскрасим ячейку в красный цвет, а шрифт сделаем белым
+                          const cell = document.getElementById("table_" + tableId);
+                          if (cell) {
+                            cell.textContent = `Booked (Table for: ${capacity})`;
+                            cell.style.color = "white";
+                            cell.style.fontWeight = "bold";
+                            cell.style.backgroundColor = "red";
+                          }
+                        }
+                      }
                     </script>
                     <!-- Ganna add getting data end -->
 
@@ -464,7 +515,7 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
     /* 
      sending data by fetch
     */
-    document.getElementById('bookingForm').addEventListener('submit', async function (event) {
+    async function submitBookingForm(event) {
       event.preventDefault(); // Disable default form submission
 
       const form = event.target;
@@ -487,7 +538,9 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
         console.error('Error:', error);
         alert('An error occurred while submitting the data.');
       }
-    });
+    }
+
+    document.getElementById('bookingForm').addEventListener('submit', submitBookingForm);
 
 
   </script>

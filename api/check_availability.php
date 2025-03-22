@@ -8,6 +8,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $time = sprintf("%02d:00:00", $_POST['time']); // Формирует время из строки 10-24
 
     if ($date && $time) {
+
+        $query = $pdo->query('SELECT id, capacity FROM restaurant_tables WHERE id <= 20');
+
+        if (!$query) {
+            die('Error executing query. Check the query.');
+        }
+
+        // Get all rows from the query result
+        $tables = $query->fetchAll(PDO::FETCH_ASSOC);
+
         // $stmt = $pdo->prepare("SELECT table_id FROM reservations WHERE reservation_date = :date AND reservation_time = :time");
         $stmt = $pdo->prepare("
             SELECT r.table_id, t.capacity 
@@ -20,7 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         echo json_encode([
             'success' => true,
-            'reservedTables' => $reservedTables
+            'reservedTables' => $reservedTables,
+            'tables' => $tables
         ]);
     } else {
         echo json_encode([
