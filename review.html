@@ -80,23 +80,11 @@
 
         </div>
     </div>
+
     <h2 class="submit-review-heading">Submit your review</h2>
     <form action="api/submit_review.php" method="post">
-        <!-- We will retrieve this ID from the session on the server -->
-        <!-- <label for="user_id">User ID:</label><br>
-        <select id="user_id" name="user_id" required>
-            <option value="" disabled selected>Select your ID</option>
-            <option value="1">User 1</option>
-            <option value="2">User 2</option>
-            <option value="3">User 3</option>
-            <option value="4">User 4</option>
-            <option value="5">User 5</option>
-            <option value="6">User 6</option>
-            <option value="7">User 7</option>
-            <option value="8">User 8</option>
-            <option value="9">User 9</option>
-            <option value="10">User 10</option>
-        </select><br><br> -->
+        <!-- We will retrieve this ID from the session on the server 
+        <label for="user_id">User ID:</label><br>-->
 
         <label for="username">Your name:</label>
         <input type="text" id="username" name="username" value="New User">
@@ -133,14 +121,16 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-
-            const user_login = localStorage.getItem("user_login"); // Get from localStorage
+            // Загрузка логина пользователя из localStorage
+            const user_login = localStorage.getItem("user_login");
 
             if (user_login) {
-                // document.getElementById("logged_user").textContent = "Logged in: " + user_login;
-
-                document.getElementById('username').value = "" + user_login;
+                const usernameInput = document.getElementById('username');
+                if (usernameInput) {
+                    usernameInput.value = user_login;
+                }
             }
+
         });
 
     </script>

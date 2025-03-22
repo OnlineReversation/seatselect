@@ -300,44 +300,51 @@
             class="u-align-left u-container-align-left u-container-style u-list-item u-radius u-repeater-item u-shape-round u-white u-list-item-1"
             data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500">
             <div class="u-container-layout u-similar-container u-valign-top u-container-layout-1">
-              <h5 class="u-align-left u-custom-font u-font-montserrat u-text u-text-2">Stella, 27</h5>
-              <p class="u-align-left u-text u-text-3"> The perfect spot for a romantic evening! We booked the 'Romantic'
+              <h5 class="u-align-left u-custom-font u-font-montserrat u-text u-text-2" id="username-1">Stella, 27</h5>
+              <h5 class="u-align-left u-custom-font u-font-montserrat u-text u-text-2" id="rating-1"></h5>
+              <p class="u-align-left u-text u-text-3" id="comments-1"> The perfect spot for a romantic evening! We
+                booked the 'Romantic'
                 table, and it was magical – a cozy atmosphere, candles, and excellent service. We’ll definitely be
                 back!&nbsp;<br>
                 <br>
+
               </p>
               <div
                 class="u-align-left u-border-2 u-border-palette-1-light-1 u-expanded-width u-line u-line-horizontal u-line-1">
               </div>
-              <h6 class="u-align-left u-text u-text-palette-1-light-1 u-text-4"> Monday, May 2023</h6>
+              <h6 class="u-align-left u-text u-text-palette-1-light-1 u-text-4" id="date-1"> Monday, May 2023</h6>
             </div>
           </div>
           <div
             class="u-align-left u-container-align-left u-container-style u-list-item u-radius u-repeater-item u-shape-round u-white u-list-item-2"
             data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500">
             <div class="u-container-layout u-similar-container u-valign-top u-container-layout-2">
-              <h5 class="u-align-left u-custom-font u-font-montserrat u-text u-text-5">Nick, 35</h5>
-              <p class="u-align-left u-text u-text-6"> We booked the 'Family Comfort' table for four, and it was
+              <h5 class="u-align-left u-custom-font u-font-montserrat u-text u-text-5" id="username-2">Nick, 35</h5>
+              <h5 class="u-align-left u-custom-font u-font-montserrat u-text u-text-2" id="rating-2"></h5>
+              <p class="u-align-left u-text u-text-6" id="comments-2"> We booked the 'Family Comfort' table for four,
+                and it was
                 amazing! A spacious table, comfy seats, and a warm atmosphere – a great choice for a family dinner.
                 Thank you for taking care of us!&nbsp;</p>
               <div
                 class="u-align-left u-border-2 u-border-palette-1-light-1 u-expanded-width u-line u-line-horizontal u-line-2">
               </div>
-              <h6 class="u-align-left u-text u-text-palette-1-light-1 u-text-7"> Monday, June 2024</h6>
+              <h6 class="u-align-left u-text u-text-palette-1-light-1 u-text-7" id="date-2"> Monday, June 2024</h6>
             </div>
           </div>
           <div
             class="u-align-left u-container-align-left u-container-style u-list-item u-radius u-repeater-item u-shape-round u-white u-list-item-3"
             data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500">
             <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3">
-              <h5 class="u-align-left u-custom-font u-font-montserrat u-text u-text-8">Olga, 33</h5>
-              <p class="u-align-left u-text u-text-9"> Our group of 12 was seated at the 'Celebration Banquet' table –
+              <h5 class="u-align-left u-custom-font u-font-montserrat u-text u-text-8" id="username-3">Olga, 33</h5>
+              <h5 class="u-align-left u-custom-font u-font-montserrat u-text u-text-2" id="rating-3"></h5>
+              <p class="u-align-left u-text u-text-9" id="comments-3"> Our group of 12 was seated at the 'Celebration
+                Banquet' table –
                 everything was perfect! Plenty of space, fast service, and we had a fantastic evening. Highly recommend!
               </p>
               <div
                 class="u-align-left u-border-2 u-border-palette-1-light-1 u-expanded-width u-line u-line-horizontal u-line-3">
               </div>
-              <h6 class="u-align-left u-text u-text-palette-1-light-1 u-text-10"> Monday, May 2024</h6>
+              <h6 class="u-align-left u-text u-text-palette-1-light-1 u-text-10" id="date-3"> Monday, May 2024</h6>
             </div>
           </div>
         </div>
@@ -615,8 +622,42 @@
         //loggedUser.href = "#"; // change to profile page if I have time to make it
         document.getElementById('username').textContent = "Welcome " + user_login;
       }
-    });
 
+      // Загрузка отзывов с сервера
+      fetch("api/get_reviews.php")
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error) {
+            console.error("Error:", data.error);
+            return;
+          }
+
+          data.forEach((review, index) => {
+            let reviewComment = document.getElementById(`comments-${index + 1}`);
+            let reviewRating = document.getElementById(`rating-${index + 1}`);
+            let reviewUsername = document.getElementById(`username-${index + 1}`);
+            let reviewDate = document.getElementById(`date-${index + 1}`);
+
+            if (reviewComment) {
+              reviewComment.innerText = review.comment;
+            }
+
+            if (reviewRating) {
+              reviewRating.textContent = "★".repeat(review.rating) + "☆".repeat(5 - review.rating);
+            }
+
+            if (reviewUsername) {
+              reviewUsername.textContent = review.username;
+            }
+
+            if (reviewDate) {
+              reviewDate.textContent = review.review_date;
+            }
+          });
+        })
+        .catch((error) => console.error("Fetch error:", error));
+
+    });
   </script>
 </body>
 
