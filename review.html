@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="board">
+            <h2 class="text-light">Words from our Customers</h2>
+            <p class="text-light">Some of the fulfilled customers reviews</p>
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="flex">
+                            <div class="comments" id="comments-1">
+                                Great service, super organized place, very cozy atmosphere, everything well prepared!
+                                SUPER RECOMMEND IT!
+                            </div>
+                            <div class="rating">
+                                <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                            </div>
+                            <div class="profile">
+                                <img src="https://images.unsplash.com/photo-1741073104186-81bd0fed603e?q=80&w=3115&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                    alt="">
+                                <a href="#">Bella</a>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="flex">
+                            <div class="comments" id="comments-2">
+                                The service is awesome, all the waiters were extremely kind and helpful. LOVED the food
+                                and the vibe!
+                            </div>
+                            <div class="rating">
+                                <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                            </div>
+                            <div class="profile">
+                                <img src="https://plus.unsplash.com/premium_photo-1734605086249-ca2691ca8c4c?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                    alt="">
+                                <a href="#">Nancy</a>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="flex">
+                            <div class="comments" id="comments-3">
+                                I really appreciate how easy it was to book a table on their website, more places should
+                                do that.
+                            </div>
+                            <div class="rating">
+                                <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                            </div>
+                            <div class="profile">
+                                <img src="https://plus.unsplash.com/premium_photo-1689551670902-19b441a6afde?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                    alt="">
+                                <a href="#">Rosie</a>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+
+            </div>
+
+        </div>
+    </div>
+    <h2 class="submit-review-heading">Submit your review</h2>
+    <form action="api/submit_review.php" method="post">
+        <!-- <label for="user_id">User ID:</label><br>
+        <select id="user_id" name="user_id" required>
+            <option value="" disabled selected>Select your ID</option>
+            <option value="1">User 1</option>
+            <option value="2">User 2</option>
+            <option value="3">User 3</option>
+            <option value="4">User 4</option>
+            <option value="5">User 5</option>
+            <option value="6">User 6</option>
+            <option value="7">User 7</option>
+            <option value="8">User 8</option>
+            <option value="9">User 9</option>
+            <option value="10">User 10</option>
+        </select><br><br> -->
+
+        <label for="rating">Rating (1-5):</label><br>
+        <div class="rating">
+            <input type="radio" id="star5" name="rating" value="5" required><label for="star5"
+                title="5 stars">&#9733;</label>
+            <input type="radio" id="star4" name="rating" value="4" required><label for="star4"
+                title="4 stars">&#9733;</label>
+            <input type="radio" id="star3" name="rating" value="3" required><label for="star3"
+                title="3 stars">&#9733;</label>
+            <input type="radio" id="star2" name="rating" value="2" required><label for="star2"
+                title="2 stars">&#9733;</label>
+            <input type="radio" id="star1" name="rating" value="1" required><label for="star1"
+                title="1 star">&#9733;</label>
+        </div><br><br>
+
+        <label for="review_text">Review Text:</label><br>
+        <textarea id="review_text" name="review_text" rows="5" cols="40" required></textarea><br><br>
+
+        <label for="review_date">Review Date:</label><br>
+        <input type="date" id="review_date" name="review_date" required><br><br>
+
+        <input type="submit" value="Submit Review">
+    </form>
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+    <script src="./review.js"></script>
+</body>
+
+</html>
