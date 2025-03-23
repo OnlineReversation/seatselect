@@ -66,7 +66,7 @@
                 href="team_page.html" style="padding: 10px 20px;">Our Team</a>
             </li>
             <li class="u-nav-item"><a id="logged_user"
-                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base logged_user"
                 href="login_page.html" style="padding: 10px 20px;">Sign Up</a>
             </li>
           </ul>
@@ -83,7 +83,7 @@
                 </li>
                 <li class="u-nav-item"><a class="u-button-style u-nav-link" href="team_page.html">Our Team</a>
                 </li>
-                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="login_page.html">Sign Up</a>
+                <li class="u-nav-item"><a class="u-button-style u-nav-link logged_user" href="login_page.html">Sign Up</a>
                 </li>
               </ul>
             </div>
@@ -151,8 +151,6 @@
 
       if (user_login) {
         document.getElementById("logged_user").textContent = "Logged in: " + user_login;
-        //loggedUser.href = "#"; // change to profile page if I have time to make it
-        // document.getElementById('username').textContent = "Welcome " + user_login;
       }
     });
 

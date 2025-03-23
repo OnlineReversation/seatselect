@@ -72,7 +72,7 @@
                 href="team_page.html" style="padding: 10px 20px;">Our Team</a>
             </li>
             <li class="u-nav-item"><a
-                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base logged_user"
                 href="login_page.html" style="padding: 10px 20px;">Sign Up</a>
             </li>
           </ul>
@@ -89,7 +89,7 @@
                 </li>
                 <li class="u-nav-item"><a class="u-button-style u-nav-link" href="team_page.html">Our Team</a>
                 </li>
-                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="login_page.html">Sign Up</a>
+                <li class="u-nav-item"><a class="u-button-style u-nav-link logged_user" href="login_page.html">Sign Up</a>
                 </li>
               </ul>
             </div>
@@ -253,7 +253,7 @@
                 </svg></span>
               <h5 class="u-align-center u-text u-text-default u-text-7">
                 <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-4"
-                  href="confirmation.html" data-page-id="870825744" title="confirmation"> Feedback &amp; Analytics</a>
+                  href="#" title="confirmation" onclick="alert('Work in progress')"> Feedback &amp; Analytics</a>
               </h5>
               <p class="u-align-center u-text u-text-default u-text-8"> Analyze customer reviews and insights</p>
             </div>
@@ -271,19 +271,8 @@
       <p class="u-small-text u-text u-text-variant u-text-1">Software Project Engineering RGU 2025</p>
     </div>
   </footer>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-
-      const user_login = localStorage.getItem("user_login"); // Get from localStorage
-
-      if (user_login) {
-        document.getElementById("logged_user").textContent = "Logged in: " + user_login;
-        //loggedUser.href = "#"; // change to profile page if I have time to make it
-
-      }
-    });
-
-  </script>
+  
+  <script src="user_login.js"></script>
 </body>
 
 </html>

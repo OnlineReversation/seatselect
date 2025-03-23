@@ -13,7 +13,7 @@
   <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
   <meta name="generator" content="Nicepage 7.5.3, nicepage.com">
   <meta name="referrer" content="origin">
-  <link rel="icon" href="images/favicon.jpg">
+
 
   <link id="u-theme-google-font" rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
@@ -75,7 +75,7 @@
                 href="team_page.html" style="padding: 10px 20px;">Our Team</a>
             </li>
             <li class="u-nav-item"><a id="logged_user"
-                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base logged_user"
                 href="login_page.html" style="padding: 10px 20px;">Sign Up</a>
             </li>
 
@@ -94,7 +94,8 @@
                 </li>
                 <li class="u-nav-item"><a class="u-button-style u-nav-link" href="team_page.html">Our Team</a>
                 </li>
-                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="login_page.html">Sign
+                <li class="u-nav-item"><a class="u-button-style u-nav-link logged_user" href="login_page.html"
+                    id="logged_user_1">Sign
                     Up</a>
                 </li>
               </ul>
@@ -115,7 +116,7 @@
           <span style="font-style: italic;" class="u-text-palette-4-light-2">EXECUTIVE </span>
           <span style="font-style: italic;" class="u-text-palette-4-light-2">RESERVATION</span>
           <br>
-          <span id="username" style="font-style: italic;" class="u-text-active-palette-1-base"></span>
+          <span id="username" style="font-style: italic;" class="u-text-active-palette-1-base logged_user"></span>
         </h1>
       </div>
     </div>
@@ -609,18 +610,19 @@
     </div>
   </footer>
 
-  /* Author: Ganna Karpycheva
-  Date: 2025-03-07 23:53
-  */
-  
+
+
   <script>
     document.addEventListener("DOMContentLoaded", function () {
 
       const user_login = localStorage.getItem("user_login"); // Get from localStorage
 
       if (user_login) {
-        document.getElementById("logged_user").textContent = "Logged in: " + user_login;
-        //loggedUser.href = "#"; // change to profile page if I have time to make it
+        let loggedUserElements = document.querySelectorAll('.logged_user');
+        loggedUserElements.forEach(function (element) {
+          element.textContent = "Logged in: " + user_login;
+        });
+
         document.getElementById('username').textContent = "Welcome " + user_login;
       }
 

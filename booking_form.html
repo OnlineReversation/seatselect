@@ -10,13 +10,7 @@
   <link rel="stylesheet" href="nicepage.css" media="screen">
   <link rel="stylesheet" href="booking_form.css" media="screen">
   <script class="u-script" type="text/javascript" src="jquery-1.9.1.min.js" defer=""></script>
-  <!-- <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script> -->
-  <!-- <meta name="generator" content="Nicepage 7.5.3, nicepage.com">
-  <meta name="referrer" content="origin">
-  <link rel="icon" href="images/favicon.jpg"> -->
-
-
-
+  
   <link id="u-theme-google-font" rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
   <script type="application/ld+json">{
@@ -71,7 +65,7 @@
                 href="team_page.html" style="padding: 10px 20px;">Our Team</a>
             </li>
             <li class="u-nav-item"><a id="logged_user"
-                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base logged_user"
                 href="login_page.html" style="padding: 10px 20px;">Sign Up</a>
             </li>
           </ul>
@@ -88,7 +82,7 @@
                 </li>
                 <li class="u-nav-item"><a class="u-button-style u-nav-link" href="team_page.html">Our Team</a>
                 </li>
-                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="login_page.html">Sign Up</a>
+                <li class="u-nav-item"><a class="u-button-style u-nav-link logged_user" href="login_page.html">Sign Up</a>
                 </li>
               </ul>
             </div>
@@ -204,17 +198,9 @@
       alert(`Invalid type of table: ${typeTable}. Please select one of the available options.`);
     }
 
-    document.addEventListener("DOMContentLoaded", function () {
-
-      const username = localStorage.getItem("username"); // Get from localStorage
-
-      if (username) {
-        document.getElementById("logged_user").textContent = "Logged in: " + username;
-      }
-    });
 
   </script>
-
+  <script src="user_login.js"></script>
 </body>
 
 </html>
