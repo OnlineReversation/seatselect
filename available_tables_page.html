@@ -88,8 +88,11 @@
                   <a class="u-button-style u-nav-link" href="team.html">Our Team</a>
                 </li>
                 <li class="u-nav-item">
-                  <a class="u-button-style u-nav-link" href="login_page.html">Sign Up</a>
+                  <a id="logged_user"
+                    class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                    href="login_page.html" style="padding: 10px 20px;">Sign Up</a>
                 </li>
+
               </ul>
             </div>
           </div>
@@ -483,9 +486,18 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
     </div>
   </footer>
 
+
   <script>
 
     document.addEventListener("DOMContentLoaded", function () {
+      const user_login = localStorage.getItem("user_login"); // Get from localStorage
+
+      if (user_login) {
+        document.getElementById("logged_user").textContent = "Logged in: " + user_login;
+        //loggedUser.href = "#"; // change to profile page if I have time to make it
+        
+      }
+
       // Функция для получения данных о вместимости столиков
       fetch('api/get_table_capacity.php')
         .then(response => response.text())  // Получаем данные как текст
@@ -544,6 +556,8 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
 
 
   </script>
+
+  <script src="user_login.js"></script>
 </body>
 
 </html>
